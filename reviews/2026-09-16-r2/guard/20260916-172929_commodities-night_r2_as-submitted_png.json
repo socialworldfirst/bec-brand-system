@@ -1,0 +1,51 @@
+{
+ "target": "/Users/steven/Downloads/bec-review-2026-09-16-r2/src/commodities-night_r2_as-submitted.png",
+ "brand": "worldfirst",
+ "run": "20260916-172929",
+ "verdict": "FIX",
+ "files_checked": 1,
+ "counts": {
+  "block": 0,
+  "advise": 2,
+  "info": 1
+ },
+ "findings": [
+  {
+   "rule": "IMG",
+   "area": "image",
+   "severity": "info",
+   "title": "Image measurements",
+   "where": "commodities-night_r2_as-submitted.png",
+   "evidence": "{\"wf_red_share\": 0.0012, \"mean_saturation\": 0.673, \"luminance_std\": 65.1, \"photo_like\": true, \"dominant\": [\"#12002D\", \"#211731\", \"#867F8C\", \"#12032B\", \"#0E0029\", \"#27052E\"]}"
+  },
+  {
+   "rule": "PHO-06",
+   "area": "photography",
+   "severity": "advise",
+   "title": "Hero the WorldFirst Red",
+   "where": "commodities-night_r2_as-submitted.png",
+   "evidence": "WF Red share 0.12% of pixels"
+  },
+  {
+   "rule": "PHO-02",
+   "area": "photography",
+   "severity": "advise",
+   "title": "Warm natural light, no oversaturation",
+   "where": "commodities-night_r2_as-submitted.png",
+   "evidence": "saturation 0.67 / luminance spread 65 reads high-contrast or oversaturated"
+  }
+ ],
+ "needs_judge": [
+  "TYP-04 Type scale follows BEC",
+  "LOG-06 Clear space",
+  "PRT-01 Partnership lockup construction",
+  "GFX-02 Belt usage",
+  "GFX-03 Pairing follows the guideline",
+  "PHO-01 Real people, natural poses",
+  "PHO-03 Business in action",
+  "PHO-04 Local vibrancy and business diversity",
+  "PHO-05 Moments of connection",
+  "CPY-06 Personality"
+ ],
+ "shots": []
+}
