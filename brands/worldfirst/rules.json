@@ -1,0 +1,405 @@
+{
+ "_meta": {
+  "brand": "WorldFirst",
+  "version": "2026-09-15.1",
+  "about": "Machine-checkable brand rules. tools/guard.py runs every rule with check=auto; /bec (the model) runs check=judge on the render. severity block = build cannot be declared done; advise = report and fix if reasonable. status provisional = value assumed until the matching guideline is dropped; feedback from the brand team updates it (see CHANGELOG.md and _feedback/).",
+  "tokens": "brands/worldfirst/tokens.json",
+  "manifest": "manifest.json"
+ },
+ "rules": [
+  {
+   "id": "COL-01",
+   "area": "colour",
+   "check": "auto",
+   "severity": "block",
+   "title": "Colours come from the palette",
+   "rule": "Every colour literal in a build is in tokens.colour.core, restricted (in its allowed context), logo_belt or extended_web_bec. Anything else is foreign.",
+   "tolerance": "deltaE < 2.5 to an allowed colour = near-match, advisory; observed_not_authority colours = advisory",
+   "source": "wf_pattern_guidelines p3; BEC Figma colour page"
+  },
+  {
+   "id": "COL-02",
+   "area": "colour",
+   "check": "auto",
+   "severity": "block",
+   "title": "WF Red present",
+   "rule": "WF Red #FF0051 appears in every composition (background, graphic element or text accent).",
+   "source": "wf_pattern_guidelines p10-11 pairing rule"
+  },
+  {
+   "id": "COL-03",
+   "area": "colour",
+   "check": "auto",
+   "severity": "block",
+   "title": "Restricted colours stay in context",
+   "rule": "#BC0050 only with the For Enterprise mark or enterprise buttons. #1677FF only inside the Ant International co-brand lockup files.",
+   "source": "tokens.colour.restricted"
+  },
+  {
+   "id": "COL-04",
+   "area": "colour",
+   "check": "auto",
+   "severity": "advise",
+   "title": "Gradients use the four defined runs",
+   "rule": "linear-gradient stops match Red, Light Grey, Purple or Grey gradient (or the belt run). No invented gradients, no text gradients except the belt-less accent word.",
+   "source": "wf_pattern_guidelines p3"
+  },
+  {
+   "id": "TYP-01",
+   "area": "typography",
+   "check": "auto",
+   "severity": "block",
+   "title": "Poppins for EN, Alibaba PuHuiTi for CN",
+   "rule": "font-family declarations resolve to Poppins (Latin) and Alibaba PuHuiTi (CJK). No other families, no serif companion, no system fonts as a design choice.",
+   "source": "Brand Center typography download; WFxWD_DLS"
+  },
+  {
+   "id": "TYP-02",
+   "area": "typography",
+   "check": "auto",
+   "severity": "advise",
+   "title": "Weights in use",
+   "rule": "Poppins 400/500/600/700/800 (Thin to Light only with a reason). PuHuiTi 300/400/500/700/900.",
+   "source": "BEC Figma typography"
+  },
+  {
+   "id": "TYP-03",
+   "area": "typography",
+   "check": "auto",
+   "severity": "block",
+   "title": "CN headings are Bold, not Extrabold",
+   "rule": "Any element with CJK text and font-weight >= 800 is a violation.",
+   "source": "BEC comment #163 (figma_tokens.json)"
+  },
+  {
+   "id": "TYP-04",
+   "area": "typography",
+   "check": "judge",
+   "severity": "advise",
+   "title": "Type scale follows BEC",
+   "rule": "Headline and body sizes sit on the tokens.typography.scale_bec_figma steps for the breakpoint; negative tracking on H1/H2 only.",
+   "source": "figma_tokens.json"
+  },
+  {
+   "id": "LOG-01",
+   "area": "logo",
+   "check": "auto",
+   "severity": "block",
+   "title": "Logo files come from the library",
+   "rule": "Any WorldFirst logo, lockup or co-brand mark is one of the manifest files (sha1 match) or the identical inline SVG paths. No re-drawn, screenshot or third-party copies.",
+   "source": "manifest.json wf-logo-*, wf-lockup-*, wf-cobrand-*, wf-enterprise-*"
+  },
+  {
+   "id": "LOG-02",
+   "area": "logo",
+   "check": "auto",
+   "severity": "block",
+   "title": "Right variant for the ground",
+   "rule": "Positive logo on white / light grey. Reverse (white) logo on WF Red, Dark Purple, Purple and Grey grounds. Never the positive logo on a dark or red ground.",
+   "source": "logo file naming pos/rev; pairing pages"
+  },
+  {
+   "id": "LOG-03",
+   "area": "logo",
+   "check": "auto",
+   "severity": "advise",
+   "status": "provisional",
+   "title": "Minimum size",
+   "rule": "Logo rendered no smaller than 24px tall on screen.",
+   "source": "assumed; logo guideline not in drop"
+  },
+  {
+   "id": "LOG-04",
+   "area": "logo",
+   "check": "auto",
+   "severity": "block",
+   "title": "No recolour, no stretch, no effects",
+   "rule": "Library SVG used with its own fills (belt gradient intact); width/height ratio within 2% of the viewBox ratio; no filters, shadows or outlines on the mark.",
+   "source": "logo files"
+  },
+  {
+   "id": "LOG-05",
+   "area": "logo",
+   "check": "auto",
+   "severity": "block",
+   "title": "Never typeset the wordmark",
+   "rule": "'WorldFirst' set in Poppins as a logo substitute is a violation. The wordmark is only the SVG.",
+   "source": "brand practice; wf_site prime directive"
+  },
+  {
+   "id": "LOG-06",
+   "area": "logo",
+   "check": "judge",
+   "severity": "advise",
+   "status": "provisional",
+   "title": "Clear space",
+   "rule": "Clear space around the logo at least the height of the 'W' on all sides; nothing crosses it.",
+   "source": "assumed; logo guideline not in drop"
+  },
+  {
+   "id": "ARC-01",
+   "area": "architecture",
+   "check": "auto",
+   "severity": "block",
+   "title": "Parent line and co-brand files",
+   "rule": "'a brand of Ant International' is only shown through wf-lockup-brand-of-ant-*; Ant International | WorldFirst only through wf-cobrand-ant-international-*; WorldFirst × Alipay only through wf-cobrand-alipay-*. Never assembled by hand from separate marks.",
+   "source": "05_brand-architecture files"
+  },
+  {
+   "id": "ARC-02",
+   "area": "architecture",
+   "check": "auto",
+   "severity": "block",
+   "title": "Enterprise mark only for enterprise",
+   "rule": "wf-enterprise-* lockups only on WorldFirst For Enterprise content; never mixed with the standard wordmark on the same surface.",
+   "source": "enterprise files; BEC button themes"
+  },
+  {
+   "id": "PRT-01",
+   "area": "partnership",
+   "check": "judge",
+   "severity": "block",
+   "title": "Partnership lockup construction",
+   "rule": "Partner logo LEFT, WorldFirst brandmark RIGHT, '+' separator, both marks at a matched maximum height. Optional description line beneath (sport template). Multi-partner: partners left in a row with grey divider bars, WorldFirst right. Enterprise partnerships use the For Enterprise mark.",
+   "source": "06_partnership-lockup templates"
+  },
+  {
+   "id": "PRT-02",
+   "area": "partnership",
+   "check": "auto",
+   "severity": "block",
+   "title": "Alipay+ / Alipay marks from library only",
+   "rule": "Any image or SVG referencing alipay must be a manifest file.",
+   "source": "wf-cobrand-alipay-*"
+  },
+  {
+   "id": "ICO-01",
+   "area": "icons",
+   "check": "auto",
+   "severity": "block",
+   "title": "Icons from the library",
+   "rule": "Icons are the 14 library icons (manifest wf-icon-*). No Font Awesome, Lucide, Heroicons, Material or emoji icons in brand builds.",
+   "source": "wf_iconography_guidelines"
+  },
+  {
+   "id": "ICO-02",
+   "area": "icons",
+   "check": "auto",
+   "severity": "advise",
+   "title": "One variant per composition",
+   "rule": "Primary, Reverse White, Duotone and Red Circular are not mixed on one surface. Reverse White only on dark grounds.",
+   "source": "wf_iconography_guidelines p4-7"
+  },
+  {
+   "id": "ICO-03",
+   "area": "icons",
+   "check": "auto",
+   "severity": "advise",
+   "title": "Stroke spec for any new icon",
+   "rule": "32px grid, 2px padding, 2px stroke, round cap, round join, corners rounded like the brandmark. New icons need BEC sign-off.",
+   "source": "wf_iconography_guidelines p3"
+  },
+  {
+   "id": "GFX-01",
+   "area": "graphics",
+   "check": "auto",
+   "severity": "advise",
+   "title": "Backgrounds from the library",
+   "rule": "Map and globe backgrounds are the exported files (wf-pattern-map, wf-pattern-globe) or the .ai masters; no re-drawn dot maps, no stock globes.",
+   "source": "09_brand-graphics"
+  },
+  {
+   "id": "GFX-02",
+   "area": "graphics",
+   "check": "judge",
+   "severity": "advise",
+   "title": "Belt usage",
+   "rule": "The belt sweeps from a lower corner across the composition, WF Red into Orange, one belt per surface, never behind body text.",
+   "source": "wf_pattern_guidelines p2, p6-9"
+  },
+  {
+   "id": "GFX-03",
+   "area": "graphics",
+   "check": "judge",
+   "severity": "advise",
+   "title": "Pairing follows the guideline",
+   "rule": "Background, main text, graphic element and supporting text follow tokens.background_pairings.",
+   "source": "wf_pattern_guidelines p10-11"
+  },
+  {
+   "id": "PHO-01",
+   "area": "photography",
+   "check": "judge",
+   "severity": "advise",
+   "title": "Real people, natural poses",
+   "rule": "Genuine expressions, positive energy, no stock-style posing.",
+   "source": "wf_photography_guidelines p4"
+  },
+  {
+   "id": "PHO-02",
+   "area": "photography",
+   "check": "auto",
+   "severity": "advise",
+   "title": "Warm natural light, no oversaturation",
+   "rule": "Warm hues; avoid high contrast and oversaturated tones. Guard measures mean saturation and luminance spread as a hint.",
+   "source": "wf_photography_guidelines p5"
+  },
+  {
+   "id": "PHO-03",
+   "area": "photography",
+   "check": "judge",
+   "severity": "advise",
+   "title": "Business in action",
+   "rule": "Everyday operations in authentic settings: packing, inventory, deliveries; mix scale shots with detail.",
+   "source": "wf_photography_guidelines p6-7"
+  },
+  {
+   "id": "PHO-04",
+   "area": "photography",
+   "check": "judge",
+   "severity": "advise",
+   "title": "Local vibrancy and business diversity",
+   "rule": "Local markets, landmarks, crafts; represent trading shops, e-commerce merchants and enterprises.",
+   "source": "wf_photography_guidelines p8-11"
+  },
+  {
+   "id": "PHO-05",
+   "area": "photography",
+   "check": "judge",
+   "severity": "advise",
+   "title": "Moments of connection",
+   "rule": "Authentic interactions, shared smiles, engaged dialogue.",
+   "source": "wf_photography_guidelines p12"
+  },
+  {
+   "id": "PHO-06",
+   "area": "photography",
+   "check": "auto",
+   "severity": "advise",
+   "title": "Hero the WorldFirst Red",
+   "rule": "A WF Red cue is present in key-visual photography (measured as >=0.5% of pixels within deltaE 12 of #FF0051).",
+   "source": "wf_photography_guidelines p13"
+  },
+  {
+   "id": "CPY-01",
+   "area": "copy",
+   "check": "auto",
+   "severity": "block",
+   "title": "Tagline exact",
+   "rule": "The master tagline is exactly 'One Account. Global Reach.' Case, punctuation and order fixed.",
+   "source": "Brand Strategy 2026"
+  },
+  {
+   "id": "CPY-02",
+   "area": "copy",
+   "check": "auto",
+   "severity": "block",
+   "title": "No em-dashes",
+   "rule": "No em-dash (U+2014) anywhere in copy.",
+   "source": "wf_copy_base (Steven override)"
+  },
+  {
+   "id": "CPY-03",
+   "area": "copy",
+   "check": "auto",
+   "severity": "advise",
+   "title": "Avoid-list",
+   "rule": "No 'game-changing', 'utilise', 'in today's world', 'seamless', 'revolutionise', 'world-class', 'cutting-edge', 'best-in-class', 'we're the best'.",
+   "source": "wf_copy_base"
+  },
+  {
+   "id": "CPY-04",
+   "area": "copy",
+   "check": "auto",
+   "severity": "advise",
+   "title": "No exclamation marks in body copy",
+   "rule": "Exclamation marks flagged outside headlines.",
+   "source": "wf_copy_base"
+  },
+  {
+   "id": "CPY-05",
+   "area": "copy",
+   "check": "auto",
+   "severity": "advise",
+   "title": "Parent line wording",
+   "rule": "'a brand of Ant International' (lowercase a, exact wording) when the parent is named in text.",
+   "source": "wf-lockup-brand-of-ant-*"
+  },
+  {
+   "id": "CPY-06",
+   "area": "copy",
+   "check": "judge",
+   "severity": "advise",
+   "title": "Personality",
+   "rule": "Real (genuine, clear, human), Dependable (consistent, reliable), Energising (ambitious, optimistic). Confident, clear, no jargon, British English.",
+   "source": "Brand Strategy 2026; wf_copy_base"
+  },
+  {
+   "id": "AFA-01",
+   "area": "compliance",
+   "check": "auto",
+   "severity": "block",
+   "title": "AFA content routes through /afa_kit",
+   "rule": "If the build mentions Argentina, AFA, Messi, Vamos Argentina or the Alipay+ sponsorship, the AFA kit rules apply and must have been loaded.",
+   "source": "/afa_kit"
+  }
+ ],
+ "avoid_words": [
+  "game-changing",
+  "game changing",
+  "utilise",
+  "utilize",
+  "in today's world",
+  "seamless",
+  "seamlessly",
+  "revolutionise",
+  "revolutionize",
+  "world-class",
+  "cutting-edge",
+  "best-in-class",
+  "we're the best",
+  "unlock",
+  "empower",
+  "leverage"
+ ],
+ "afa_keywords": [
+  "argentina",
+  "afa",
+  "messi",
+  "vamos argentina",
+  "albiceleste",
+  "selección"
+ ],
+ "third_party_icon_markers": [
+  "font-awesome",
+  "fontawesome",
+  "lucide",
+  "heroicons",
+  "material-icons",
+  "materialicons",
+  "ionicons",
+  "feather-icons",
+  "bootstrap-icons",
+  "phosphor"
+ ],
+ "tagline": "One Account. Global Reach.",
+ "parent_line": "a brand of Ant International",
+ "known_external_logo_urls": [
+  "https://mdn.marmot-cloud.com/worldfirst/sites/38/2026/04/20260424113953863.svg",
+  "https://mdn.marmot-cloud.com/worldfirst/",
+  "https://cdn.marmot-cloud.com/worldfirst/"
+ ],
+ "known_logo_sha1": {
+  "3c01120917f2a51835296a8ebbc703fe5e0dd2a0": "production worldfirst.com asset (observed copy: Documents/Claude/wf_clone_test/assets/bettr.svg)",
+  "037270a83942f9e9e381ce8e104eafc33d49dbb1": "production worldfirst.com asset (observed copy: Documents/Claude/wf_clone_test/assets/antom.svg)",
+  "da446ef033bf8f0be70568312b53f65e0bbd79c9": "production worldfirst.com asset (observed copy: Documents/Claude/wf_clone_test/assets/alipay.svg)",
+  "563bd0b1aff7b0a7bb0f5f9d4af4ca12ac1d51e0": "production worldfirst.com asset (observed copy: Documents/Claude/wf_clone_test/assets/wf_partner.svg)",
+  "941183ec4355ad0ccb82680c5392817a48705ac2": "production worldfirst.com asset (observed copy: Documents/Claude/co-marketing/wf/logo.svg)"
+ },
+ "third_party_mark_colours": {
+  "#00B67A": "Trustpilot green, only inside the Trustpilot widget/stars",
+  "#0A66C2": "LinkedIn blue, only inside the LinkedIn mark",
+  "#1877F2": "Facebook blue, only inside the Facebook mark",
+  "#FF0000": "YouTube red, only inside the YouTube mark"
+ }
+}
